@@ -14,7 +14,7 @@ class ObjectiveFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const ticks = [1, 3, 5, 10];
+    const ticks = [1, 2, 4, 6];
 
     var provider = Provider.of<LogProvider>(context, listen: false);
     provider.fetchAndSetObjectives();
@@ -32,12 +32,14 @@ class ObjectiveFeed extends StatelessWidget {
         .map((e) => provider.getMonthlyLogsBYIDMONTH(e.id, 2));
 
     List<String> features = [];
-    List<List<int>> data = [[]];
+    List<List<int>> data = [[], []];
+    print("Print month");
     print(objectiveDataThisMonth);
+    print(objectiveDataLastMonth);
     features.addAll(objectiveTitles);
     data[0].addAll(objectiveDataThisMonth);
     data[1].addAll(objectiveDataLastMonth);
-    data[2].addAll(objectiveDataLastLastMonth);
+    // data[2].addAll(objectiveDataLastLastMonth);
 
     return Scaffold(
         appBar: AppBar(
@@ -58,7 +60,6 @@ class ObjectiveFeed extends StatelessWidget {
                 ticks: ticks,
                 features: features,
                 data: data,
-                reverseAxis: true,
                 useSides: false,
               ),
             ),

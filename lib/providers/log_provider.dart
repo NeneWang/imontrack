@@ -28,10 +28,10 @@ class LogProvider with ChangeNotifier {
   }
 
   List<ImageData> getImageDataByObjectiveID(String objectiveID) {
-    print(objectiveID);
+    // print(objectiveID);
     var events =
         _log_events.where((element) => element.objectiveID == objectiveID);
-    print(events);
+    // print(events);
     return [...events.where((element) => element.objectiveID == objectiveID)];
   }
 
@@ -105,19 +105,19 @@ class LogProvider with ChangeNotifier {
 
       logFoundDuringThisWeek = false;
       for (var log in _log_events) {
-        print(log.dateTime);
+        // print(log.dateTime);
         if (!logFoundDuringThisWeek &&
             log.dateTime.isBefore(dateCap) &&
             log.dateTime.isAfter(prevDateCap)) {
-          print("Counted");
+          // print("Counted");
           countStreaks += 1;
           logFoundDuringThisWeek = true;
         }
       }
-      print("Cap");
-      print(dateCap);
-      print(prevDateCap);
-      print(logFoundDuringThisWeek);
+      // print("Cap");
+      // print(dateCap);
+      // print(prevDateCap);
+      // print(logFoundDuringThisWeek);
       dateCap = dateCap.subtract(Duration(days: 7));
     }
     return countStreaks;
