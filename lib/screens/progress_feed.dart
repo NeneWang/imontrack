@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CreateLog extends StatefulWidget {
+class ProgressFeed extends StatefulWidget {
   static const routeName = '/progress_feed';
   @override
-  _CreateLogState createState() => _CreateLogState();
+  _ProgressFeedState createState() => _ProgressFeedState();
 }
 
-class _CreateLogState extends State<CreateLog> {
+class _ProgressFeedState extends State<ProgressFeed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

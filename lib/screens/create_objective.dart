@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CreateLog extends StatefulWidget {
+class CreateObjective extends StatefulWidget {
   static const routeName = '/create-objective';
   @override
-  _CreateLogState createState() => _CreateLogState();
+  _CreateObjectiveState createState() => _CreateObjectiveState();
 }
 
-class _CreateLogState extends State<CreateLog> {
+class _CreateObjectiveState extends State<CreateObjective> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

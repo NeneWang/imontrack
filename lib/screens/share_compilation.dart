@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CreateLog extends StatefulWidget {
+class ShareCompilation extends StatefulWidget {
   static const routeName = '/share_compilation';
   @override
-  _CreateLogState createState() => _CreateLogState();
+  _ShareCompilationState createState() => _ShareCompilationState();
 }
 
-class _CreateLogState extends State<CreateLog> {
+class _ShareCompilationState extends State<ShareCompilation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
