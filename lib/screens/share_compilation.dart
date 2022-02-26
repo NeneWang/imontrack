@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CreateLog extends StatefulWidget {
-  static const routeName = '/create-log';
+  static const routeName = '/share_compilation';
   @override
   _CreateLogState createState() => _CreateLogState();
 }
