@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 class Tools {
   static void setStatusBarColor(Color color) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -33,5 +34,34 @@ class Tools {
     return dateTime.subtract(const Duration(days: 1));
   }
 
+  static String getFormattedDateShort(int time) {
+    DateFormat newFormat = new DateFormat("MMM dd, yyyy");
+    return newFormat.format(new DateTime.fromMillisecondsSinceEpoch(time));
+  }
+
+    static String getFormattedDateShortDateTime(DateTime time) {
+    DateFormat newFormat = new DateFormat("MMM dd, yyyy");
+    return newFormat.format(time);
+  }
+
+  static String getFormattedDateSimple(int time) {
+    DateFormat newFormat = new DateFormat("yyyy-MM-dd");
+    return newFormat.format(new DateTime.fromMillisecondsSinceEpoch(time));
+  }
+
+  static String getFormattedDateEvent(int time) {
+    DateFormat newFormat = new DateFormat("EEE, MMM dd yyyy");
+    return newFormat.format(new DateTime.fromMillisecondsSinceEpoch(time));
+  }
+
+  static String getFormattedTimeEvent(int time) {
+    DateFormat newFormat = new DateFormat("h:mm a");
+    return newFormat.format(new DateTime.fromMillisecondsSinceEpoch(time));
+  }
+
+    static String getFormattedTimeEventDateTime(DateTime time) {
+    DateFormat newFormat = new DateFormat("h:mm a");
+    return newFormat.format(time);
+  }
 
 }
