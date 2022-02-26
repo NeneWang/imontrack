@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '../providers/log_provider.dart';
 
-
 class ViewLogScreen extends StatelessWidget {
   static const routeName = '/view-log';
 
@@ -18,10 +17,12 @@ class ViewLogScreen extends StatelessWidget {
         .getObjectiveNameByID(logEvent.objectiveID);
 
     final List<String> tags = logEvent.tags;
-    if (tags != null) {
+    if (logEvent.tags.length>0 || logEvent.tags != null) {
       logEvent.tags.forEach((element) {
         tagsWidget.add(Chip(label: Text(objectiveName)));
       });
+    } else {
+      tagsWidget.add(Chip(label: Text("No Objective set.")));
     }
 
     // print(logEvent);
@@ -44,9 +45,7 @@ class ViewLogScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Text(
-            DateFormat('yyyy-MM-dd – kk:mm').format(logEvent.dateTime)
-          ),
+          Text(DateFormat('yyyy-MM-dd – kk:mm').format(logEvent.dateTime)),
           Text(
             logEvent.description,
           ),

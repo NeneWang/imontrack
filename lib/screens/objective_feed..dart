@@ -101,6 +101,6 @@ class ObjectiveFeed extends StatelessWidget {
             )
           ],
         ),
-        bottomNavigationBar: BottomNavigator(indexNavigator: 0, context: context,));
+        bottomNavigationBar: BottomNavigator(indexNavigator: 1, context: context,));
   }
 }

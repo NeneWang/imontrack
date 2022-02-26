@@ -184,7 +184,7 @@ class _CreateLogState extends State<CreateLog> {
                                     itemBuilder: (ctx, i) => ActionChip(
                                         backgroundColor: selectedObjectiveID ==
                                                 imagesData.objectives[i].id
-                                            ? Colors.cyan[100]
+                                            ? Theme.of(context).accentColor
                                             : Colors.grey[1],
                                         onPressed: () {
                                           selectedObjectiveID =
