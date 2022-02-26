@@ -38,7 +38,10 @@ class _CreateObjectiveState extends State<CreateObjective> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Create Objectives")),
-      bottomNavigationBar: BottomNavigator(0, context),
+      bottomNavigationBar: BottomNavigator(
+        indexNavigator: 0,
+        context: context,
+      ),
       body: Column(
         children: <Widget>[
           Expanded(

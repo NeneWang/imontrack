@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_radar_chart/flutter_radar_chart.dart';
@@ -99,6 +101,6 @@ class ObjectiveFeed extends StatelessWidget {
             )
           ],
         ),
-        bottomNavigationBar: BottomNavigator(0, context));
+        bottomNavigationBar: BottomNavigator(indexNavigator: 0, context: context,));
   }
 }
