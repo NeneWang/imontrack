@@ -17,7 +17,7 @@ class ObjectiveFeed extends StatelessWidget {
           title: Text('Objectives Feed'),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.add_a_photo),
+              icon: Icon(Icons.add),
               onPressed: () {
                 Navigator.of(context).pushNamed(CreateLog.routeName);
               },

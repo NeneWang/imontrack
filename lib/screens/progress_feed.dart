@@ -6,6 +6,7 @@ import '../widgets/bottom_navigator.dart';
 import '../widgets/stat_highlights.dart';
 
 import 'create_log.dart';
+import 'create_compilation.dart';
 
 import 'view_log.dart';
 
@@ -19,7 +20,13 @@ class ProgressFeed extends StatelessWidget {
           title: Text('Progress Feed'),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.add_a_photo),
+              icon: Icon(Icons.video_call),
+              onPressed: () {
+                Navigator.of(context).pushNamed(CreateCompilation.routeName);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.add),
               onPressed: () {
                 Navigator.of(context).pushNamed(CreateLog.routeName);
               },
