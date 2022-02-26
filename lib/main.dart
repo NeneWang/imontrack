@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'providers/images_provider.dart';
+import 'providers/log_provider.dart';
 
 // Import Screens
 import 'screens/create_compilation.dart';

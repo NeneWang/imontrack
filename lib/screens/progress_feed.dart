@@ -12,7 +12,7 @@ class ProgressFeed extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('My Images'),
+          title: Text('Progress Feed'),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add_a_photo),

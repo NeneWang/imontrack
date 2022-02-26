@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
-import '../providers/images_provider.dart';
+import '../providers/log_provider.dart';
 import '../widgets/bottom_navigator.dart';
 import '../widgets/image_input.dart';
 
@@ -24,10 +24,12 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
   final _titleController = TextEditingController();
   final _tagsController = TextEditingController();
 
+
   File _pickedImage;
 
   Future<DateTime> selectedDate;
   String inputDate = "";
+  String inputDescription = "";
 
   void _selectImage(File pickedImage) {
     _pickedImage = pickedImage;
@@ -58,7 +60,7 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
     }
   }
 
-  void _savePlace() {
+  void _saveLog() {
     //Only the picked Image is necessary
     if (_pickedImage == null) {
       return;
@@ -71,7 +73,8 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
             : _titleController.text,
         _pickedImage,
         registerDate.toIso8601String(),
-        selectedTags);
+        selectedTags,
+        inputDescription);
     Navigator.of(context).pop();
 
     // print("Saving Place");
@@ -81,7 +84,7 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Upload Image'),
+        title: Text('Add Log'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -153,7 +156,7 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
           RaisedButton.icon(
             icon: Icon(Icons.add),
             label: Text('Upload Image'),
-            onPressed: _savePlace,
+            onPressed: _saveLog,
             elevation: 0,
             // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             color: Theme.of(context).accentColor,

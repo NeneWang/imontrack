@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 
 class ImageData {
   final String id;
-  final String title; //optional
+  final String title;
+  final String description;
+  final String goal;
   List<String> tags = [];
   List<String> meta_tags = [];
   final String user_id; //owners id
@@ -15,6 +17,8 @@ class ImageData {
     @required this.id,
     this.title,
     this.tags,
+    this.description,
+    this.goal,
     this.meta_tags,
     this.user_id,
     // @required this.location,
