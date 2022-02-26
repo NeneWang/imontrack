@@ -26,6 +26,21 @@ class LogProvider with ChangeNotifier {
     weekSinceStart++;
   }
 
+  List<ImageData> getImageDataByObjectiveID(String objectiveID) {
+    print(objectiveID);
+    var events = _log_events.where((element) => element.objectiveID == objectiveID);
+    print(events);
+    return [
+      ...events.where((element) => element.objectiveID == objectiveID)
+    ];
+  }
+
+  int getWeekProgressByID(String objectiveID) {
+    // The progress so you could mark them with X's
+    return getImageDataByObjectiveID(objectiveID).length;
+    // You have to count just by the logs. It doesn't matter really anymore easy code.
+  }
+
   int get eventsCount {
     return _log_events.length;
   }
