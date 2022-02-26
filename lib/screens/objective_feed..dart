@@ -24,14 +24,20 @@ class ObjectiveFeed extends StatelessWidget {
     // print(provider.objectives.length);
 
     var objectiveTitles = provider.objectives.map((e) => e.title);
-    var objectiveData =
-        provider.objectives.map((e) => provider.getWeekProgressByID(e.id));
+    var objectiveDataThisMonth = provider.objectives
+        .map((e) => provider.getMonthlyLogsBYIDMONTH(e.id, 0));
+    var objectiveDataLastMonth = provider.objectives
+        .map((e) => provider.getMonthlyLogsBYIDMONTH(e.id, 1));
+    var objectiveDataLastLastMonth = provider.objectives
+        .map((e) => provider.getMonthlyLogsBYIDMONTH(e.id, 2));
 
     List<String> features = [];
     List<List<int>> data = [[]];
-    print(objectiveData);
+    print(objectiveDataThisMonth);
     features.addAll(objectiveTitles);
-    data[0].addAll(objectiveData);
+    data[0].addAll(objectiveDataThisMonth);
+    data[1].addAll(objectiveDataLastMonth);
+    data[2].addAll(objectiveDataLastLastMonth);
 
     return Scaffold(
         appBar: AppBar(
