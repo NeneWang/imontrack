@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:imontrack/screens/objective_feed..dart';
 
 import '../models/ImageData.dart';
 import '../models/objective.dart';
@@ -85,6 +86,10 @@ class LogProvider with ChangeNotifier {
 
   ImageData findById(String id) {
     return _log_events.firstWhere((place) => place.id == id);
+  }
+
+  Objective getLastObjective(){
+    return _objectives.last;
   }
 
   Future<void> addImage(String pickedTitle, File pickedImage, String testDate,

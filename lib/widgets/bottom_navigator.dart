@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imontrack/screens/objective_feed..dart';
 import '../screens/create_log.dart';
 import '../screens/progress_feed.dart';
 import '../screens/create_objective.dart';
@@ -19,7 +20,7 @@ class BottomNavigator extends StatelessWidget {
         switch (index) {
           case 0:
             Navigator.of(context).pushReplacement(PageRouteBuilder(
-              pageBuilder: (_, __, ___) => CreateLog(),
+              pageBuilder: (_, __, ___) => ObjectiveFeed(),
               transitionDuration: Duration(seconds: 0),
             ));
             break;

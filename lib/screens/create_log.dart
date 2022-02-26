@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 import '../providers/log_provider.dart';
 import '../widgets/bottom_navigator.dart';
 import '../widgets/image_input.dart';
@@ -10,34 +9,32 @@ import '../widgets/image_input.dart';
 import '../models/ImageData.dart';
 import '/utils/tools.dart';
 
-
-
-
 class CreateLog extends StatefulWidget {
   static const routeName = '/create-log';
   @override
   _CreateLogState createState() => _CreateLogState();
 }
 
-class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
+class _CreateLogState extends State<CreateLog> {
+  List<String> selectedTags = [];
 
   final _titleController = TextEditingController();
   final _tagsController = TextEditingController();
   final _descriptionController = TextEditingController();
-
 
   File _pickedImage;
 
   Future<DateTime> selectedDate;
   String inputDate = "";
   String inputDescription = "";
+  String selectedObjectiveID = "";
 
   void _selectImage(File pickedImage) {
     _pickedImage = pickedImage;
   }
 
   void _addTag(String tagName) {
-  setState(() {
+    setState(() {
       selectedTags.add(tagName);
     });
     _tagsController.clear();
@@ -81,6 +78,8 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
     // print("Saving Place");
   }
 
+  void _chooseObjective(e) {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,6 +90,7 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
+            flex: 7,
             child: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.all(10),
@@ -108,7 +108,8 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
                     TextField(
                       decoration:
                           InputDecoration(labelText: 'Description (optional)'),
-                      controller: _descriptionController,),
+                      controller: _descriptionController,
+                    ),
                     TextField(
                       decoration:
                           InputDecoration(labelText: 'Enter a tag (optional)'),
@@ -158,6 +159,42 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
               ),
             ),
           ),
+          Text("Choose an Objective"),
+          Expanded(
+              flex: 1,
+              child: FutureBuilder(
+                future: Provider.of<LogProvider>(context, listen: false)
+                    .fetchAndSetObjectives(),
+                builder: (ctx, snapshot) => snapshot.connectionState ==
+                        ConnectionState.waiting
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Consumer<LogProvider>(
+                        child: Center(
+                          child: const Text('Got no Log yet.'),
+                        ),
+                        builder: (ctx, imagesData, ch) =>
+                            imagesData.objectives.length <= 0
+                                ? ch
+                                : ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: imagesData.objectives.length,
+                                    itemBuilder: (ctx, i) => ActionChip(
+                                        backgroundColor: selectedObjectiveID ==
+                                                imagesData.objectives[i].id
+                                            ? Colors.cyan[100]
+                                            : Colors.grey[1],
+                                        onPressed: () {
+                                          selectedObjectiveID =
+                                              imagesData.objectives[i].id;
+                                          setState(() {});
+                                        },
+                                        label: Text(
+                                            imagesData.objectives[i].title)),
+                                  ),
+                      ),
+              )),
           RaisedButton.icon(
             icon: Icon(Icons.add),
             label: Text('Upload Image'),
@@ -169,7 +206,9 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
         ],
       ),
     );
-  }  void showDialogPicker(BuildContext context) {
+  }
+
+  void showDialogPicker(BuildContext context) {
     selectedDate = showDatePicker(
       context: context,
       initialDate: DateTime.now(),

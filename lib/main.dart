@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imontrack/models/objective.dart';
 import 'package:imontrack/screens/view_log.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,7 @@ import 'screens/create_log.dart';
 import 'screens/create_objective.dart';
 import 'screens/progress_feed.dart';
 import 'screens/share_compilation.dart';
+import 'screens/objective_feed..dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +34,8 @@ class MyApp extends StatelessWidget {
           CreateObjective.routeName: (ctx) => CreateObjective(),
           ProgressFeed.routeName: (ctx) => ProgressFeed(),
           ShareCompilation.routeName: (ctx) => ShareCompilation(),
-          ViewLogScreen.routeName: (ctx) => ViewLogScreen()
+          ViewLogScreen.routeName: (ctx) => ViewLogScreen(),
+          ObjectiveFeed.routeName: (ctx) => ObjectiveFeed()
         },
       ),
     );
