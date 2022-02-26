@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           title: 'Images',
           theme:
               ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.grey),
-          home: CreateLog()),
+          home: ProgressFeed()),
     );
   }
 }

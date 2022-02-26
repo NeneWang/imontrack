@@ -1,3 +1,4 @@
+import '../widgets/bottom_navigator.dart';
 import 'package:flutter/material.dart';
 
 class CreateObjective extends StatefulWidget {
@@ -11,6 +12,8 @@ class _CreateObjectiveState extends State<CreateObjective> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Create Objectives")),
+      
+      bottomNavigationBar: BottomNavigator(0, context)
     );
   }
 }
