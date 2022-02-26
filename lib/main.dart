@@ -21,10 +21,18 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: LogProvider(),
       child: MaterialApp(
-          title: 'Images',
-          theme:
-              ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.grey),
-          home: ProgressFeed()),
+        title: 'Images',
+        theme:
+            ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.grey),
+        home: ProgressFeed(),
+        routes: {
+          CreateCompilation.routeName: (ctx) => CreateCompilation(),
+          CreateLog.routeName: (ctx) => CreateLog(),
+          CreateObjective.routeName: (ctx) => CreateObjective(),
+          ProgressFeed.routeName: (ctx) => ProgressFeed(),
+          ShareCompilation.routeName: (ctx) => ShareCompilation()
+        },
+      ),
     );
   }
 }

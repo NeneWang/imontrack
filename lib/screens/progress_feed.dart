@@ -32,7 +32,7 @@ class ProgressFeed extends StatelessWidget {
                 )
               : Consumer<LogProvider>(
                   child: Center(
-                    child: const Text('Got no places yet, start adding some!'),
+                    child: const Text('Got no Log yet.'),
                   ),
                   builder: (ctx, imagesData, ch) =>
                       imagesData.events.length <= 0
