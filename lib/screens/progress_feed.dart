@@ -10,21 +10,65 @@ import 'create_compilation.dart';
 
 import 'view_log.dart';
 
-void addOneWeek() {
+class StatsBoard extends StatefulWidget {
+  @override
+  _StatsBoardState createState() => _StatsBoardState();
+}
+
+class _StatsBoardState extends State<StatsBoard> {
+  void addOneWeek(BuildContext context) {
 // Increase the week count somehow. like don't even count the days just add the counter and say how mnay weeks.
-  
+    Provider.of<LogProvider>(context, listen: false).increaseWeek();
+    setState(() {});
+  }
+
+  @override
+  build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    return Expanded(
+        flex: 2,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                StatHighlight(
+                  screenSize: screenSize,
+                  title:
+                      "${Provider.of<LogProvider>(context, listen: false).weekSinceStart}",
+                  description: "Weeks",
+                ),
+                StatHighlight(
+                  screenSize: screenSize,
+                  title: "${Provider.of<LogProvider>(context, listen: false).streaks}",
+                  description: "Streaks",
+                ),
+                StatHighlight(
+                  screenSize: screenSize,
+                  title: "4",
+                  description: "Max Streaks",
+                ),
+                StatHighlight(
+                  screenSize: screenSize,
+                  title: "${Provider.of<LogProvider>(context, listen: false).eventsCount}",
+                  description: "Total Logs",
+                ),
+              ],
+            ),
+            FlatButton(
+                onPressed: () => addOneWeek(context), child: Text("+1 week")),
+          ],
+        ));
+  }
 }
 
 class ProgressFeed extends StatelessWidget {
   static const routeName = '/progress-feed';
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Text("+1 wk"),
-          onPressed: addOneWeek,
-        ),
         appBar: AppBar(
           title: Text('Progress Feed'),
           actions: <Widget>[
@@ -44,35 +88,7 @@ class ProgressFeed extends StatelessWidget {
         ),
         body: Column(
           children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  StatHighlight(
-                    screenSize: screenSize,
-                    title: "2",
-                    description: "Weeks",
-                  ),
-                  StatHighlight(
-                    screenSize: screenSize,
-                    title: "2",
-                    description: "Streaks",
-                  ),
-                  StatHighlight(
-                    screenSize: screenSize,
-                    title: "4",
-                    description: "Max Streaks",
-                  ),
-                  StatHighlight(
-                    screenSize: screenSize,
-                    title: "6",
-                    description: "Total Logs",
-                  )
-                ],
-              ),
-            ),
+            StatsBoard(),
             Expanded(
                 flex: 5,
                 child: FutureBuilder(

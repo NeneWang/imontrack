@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:intl/intl.dart';
 import '../providers/log_provider.dart';
+
 
 class ViewLogScreen extends StatelessWidget {
   static const routeName = '/view-log';
@@ -44,7 +45,7 @@ class ViewLogScreen extends StatelessWidget {
             height: 10,
           ),
           Text(
-            logEvent.dateTime.toIso8601String(),
+            DateFormat('yyyy-MM-dd – kk:mm').format(logEvent.dateTime)
           ),
           Text(
             logEvent.description,

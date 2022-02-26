@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:imontrack/screens/objective_feed..dart';
 
+import 'package:intl/intl.dart';
 import '../models/ImageData.dart';
 import '../models/objective.dart';
 import '../helpers/db_helper.dart';
@@ -11,7 +12,7 @@ import '../utils/tools.dart';
 class LogProvider with ChangeNotifier {
   List<ImageData> _log_events = [];
   List<Objective> _objectives = [];
-  int weekSinceStart = 1;
+  int weekSinceStart = 0;
 
   List<ImageData> get events {
     return [..._log_events];
@@ -21,8 +22,12 @@ class LogProvider with ChangeNotifier {
     return [..._objectives];
   }
 
-  int increaseWeek(){
+  int increaseWeek() {
     weekSinceStart++;
+  }
+
+  int get eventsCount {
+    return _log_events.length;
   }
 
   int get weeksStreak {
@@ -46,6 +51,46 @@ class LogProvider with ChangeNotifier {
     return (totalDaysWithouthBreaking / 7).floor() + 1;
 
     return 0;
+  }
+
+  int get streaks {
+    // You actually have to go from now to the past. This can be done by
+    // reducing one into the past and start counting.
+    // So the algo would go like this today + n skipped. Then check if any
+    // loggin had been created during those times.
+    // for each week from the hypothetic until you cant find more.
+    bool logFoundDuringThisWeek = true;
+
+    int countStreaks = 0;
+    DateTime dateCap = hypotheticToday.add(Duration(days: 0));
+    while (logFoundDuringThisWeek) {
+      DateTime prevDateCap = dateCap.subtract(Duration(days: 9));
+      // for each date check if ONE has the condition.
+
+      logFoundDuringThisWeek = false;
+      for (var log in _log_events) {
+        print(log.dateTime);
+        if (!logFoundDuringThisWeek &&
+            log.dateTime.isBefore(dateCap) &&
+            log.dateTime.isAfter(prevDateCap)) {
+          print("Counted");
+          countStreaks += 1;
+          logFoundDuringThisWeek = true;
+        }
+      }
+      print("Cap");
+      print(dateCap);
+      print(prevDateCap);
+      print(logFoundDuringThisWeek);
+      dateCap = dateCap.subtract(Duration(days: 7));
+    }
+    return countStreaks;
+  }
+
+  DateTime get hypotheticToday {
+    DateTime now = Tools.getSimplifiedDate(DateTime.now());
+    // DateTime.now()
+    return now.add(Duration(days: 7 * weekSinceStart));
   }
 
   int get logUploaded {
@@ -94,25 +139,24 @@ class LogProvider with ChangeNotifier {
     return _log_events.firstWhere((log) => log.id == id);
   }
 
-  String getObjectiveNameByID(String id){
+  String getObjectiveNameByID(String id) {
     return _objectives.firstWhere((element) => element.id == id).title;
   }
 
-  Objective getLastObjective(){
+  Objective getLastObjective() {
     return _objectives.last;
   }
 
   Future<void> addImage(String pickedTitle, File pickedImage, String testDate,
       List<String> selectedTags, String description, String objectiveID) async {
     final newLog = ImageData(
-      id: DateTime.now().toString(),
-      image: pickedImage,
-      title: pickedTitle,
-      dateTime: DateTime.parse(testDate),
-      tags: selectedTags,
-      description: description,
-      objectiveID: objectiveID
-    );
+        id: DateTime.now().toString(),
+        image: pickedImage,
+        title: pickedTitle,
+        dateTime: DateTime.parse(testDate),
+        tags: selectedTags,
+        description: description,
+        objectiveID: objectiveID);
     _log_events.add(newLog);
     notifyListeners();
     DBHelper.insert('user_logs', {
@@ -142,7 +186,7 @@ class LogProvider with ChangeNotifier {
     });
   }
 
-  Future <void> fetchAll() async {
+  Future<void> fetchAll() async {
     fetchAndSetImages();
     fetchAndSetObjectives();
   }
