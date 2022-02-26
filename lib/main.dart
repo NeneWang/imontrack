@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imontrack/screens/view_log.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/log_provider.dart';
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
           CreateLog.routeName: (ctx) => CreateLog(),
           CreateObjective.routeName: (ctx) => CreateObjective(),
           ProgressFeed.routeName: (ctx) => ProgressFeed(),
-          ShareCompilation.routeName: (ctx) => ShareCompilation()
+          ShareCompilation.routeName: (ctx) => ShareCompilation(),
+          ViewLogScreen.routeName: (ctx) => ViewLogScreen()
         },
       ),
     );
