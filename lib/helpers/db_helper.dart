@@ -10,7 +10,7 @@ class DBHelper {
       db.execute(
           'CREATE TABLE user_objectives(id TEXT PRIMARY KEY,  title TEXT, description TEXT)');
       return db.execute(
-          'CREATE TABLE user_logs(id TEXT PRIMARY KEY, title TEXT, image TEXT, dateTime TEXT, tags TEXT, description TEXT)');
+          'CREATE TABLE user_logs(id TEXT PRIMARY KEY, title TEXT, image TEXT, dateTime TEXT, tags TEXT, description TEXT, objectiveID TEXT)');
     }, version: 1);
   }
 

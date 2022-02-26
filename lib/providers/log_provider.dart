@@ -85,7 +85,11 @@ class LogProvider with ChangeNotifier {
   }
 
   ImageData findById(String id) {
-    return _log_events.firstWhere((place) => place.id == id);
+    return _log_events.firstWhere((log) => log.id == id);
+  }
+
+  String getObjectiveNameByID(String id){
+    return _objectives.firstWhere((element) => element.id == id).title;
   }
 
   Objective getLastObjective(){
@@ -93,7 +97,7 @@ class LogProvider with ChangeNotifier {
   }
 
   Future<void> addImage(String pickedTitle, File pickedImage, String testDate,
-      List<String> selectedTags, String description) async {
+      List<String> selectedTags, String description, String objectiveID) async {
     final newLog = ImageData(
       id: DateTime.now().toString(),
       image: pickedImage,
@@ -101,6 +105,7 @@ class LogProvider with ChangeNotifier {
       dateTime: DateTime.parse(testDate),
       tags: selectedTags,
       description: description,
+      objectiveID: objectiveID
     );
     _log_events.add(newLog);
     notifyListeners();
@@ -109,6 +114,7 @@ class LogProvider with ChangeNotifier {
       'title': newLog.title,
       'image': newLog.image.path,
       'dateTime': newLog.dateTime.toIso8601String(),
+      'objectiveID': newLog.objectiveID,
       'description': newLog.description,
       'tags': newLog.tags.join(",")
     });
@@ -142,6 +148,7 @@ class LogProvider with ChangeNotifier {
               image: File(item['image']),
               description: item['description'],
               dateTime: DateTime.parse(item['dateTime']),
+              objectiveID: item['objectiveID'],
               tags: item['tags'] != null ? item['tags'].split(',') : null),
         )
         .toList();

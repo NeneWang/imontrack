@@ -13,12 +13,13 @@ class ViewLogScreen extends StatelessWidget {
     final id = ModalRoute.of(context).settings.arguments;
     final logEvent =
         Provider.of<LogProvider>(context, listen: false).findById(id);
-
+    String objectiveName = Provider.of<LogProvider>(context, listen: false)
+        .getObjectiveNameByID(logEvent.objectiveID);
 
     final List<String> tags = logEvent.tags;
     if (tags != null) {
       logEvent.tags.forEach((element) {
-        tagsWidget.add(Chip(label: Text(element)));
+        tagsWidget.add(Chip(label: Text(objectiveName)));
       });
     }
 
@@ -52,19 +53,19 @@ class ViewLogScreen extends StatelessWidget {
             height: 10,
           ),
           Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: Wrap(
-                        spacing: 10,
-                        children: tagsWidget,
-                      ),
-                    ),
-                  ],
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Wrap(
+                    spacing: 10,
+                    children: tagsWidget,
+                  ),
                 ),
-              ),
+              ],
+            ),
+          ),
         ],
       ),
     );

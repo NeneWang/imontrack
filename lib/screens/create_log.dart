@@ -72,7 +72,8 @@ class _CreateLogState extends State<CreateLog> {
         _pickedImage,
         registerDate.toIso8601String(),
         selectedTags,
-        _descriptionController.text);
+        _descriptionController.text,
+        selectedObjectiveID);
     Navigator.of(context).pop();
 
     // print("Saving Place");
