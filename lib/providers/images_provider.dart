@@ -6,7 +6,7 @@ import '../models/ImageData.dart';
 import '../helpers/db_helper.dart';
 import '../utils/tools.dart';
 
-class GreatPlaces with ChangeNotifier {
+class LogProvider with ChangeNotifier {
   List<ImageData> _events = [];
 
   List<ImageData> get events {
