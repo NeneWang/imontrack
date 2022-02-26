@@ -15,7 +15,7 @@ class LogProvider with ChangeNotifier {
     return [..._log_events];
   }
 
-  List<Objective> get objectives{
+  List<Objective> get objectives {
     return [..._objectives];
   }
 
@@ -37,7 +37,7 @@ class LogProvider with ChangeNotifier {
       lastDate = simplifiedDate;
     }
 
-    return (totalDaysWithouthBreaking / 7).floor()+1;
+    return (totalDaysWithouthBreaking / 7).floor() + 1;
 
     return 0;
   }
@@ -104,12 +104,13 @@ class LogProvider with ChangeNotifier {
       'title': newLog.title,
       'image': newLog.image.path,
       'dateTime': newLog.dateTime.toIso8601String(),
+      'description': newLog.description,
       'tags': newLog.tags.join(",")
     });
   }
 
-
-   Future<void> addObjective(String pickedTitle, String pickedDescription) async {
+  Future<void> addObjective(
+      String pickedTitle, String pickedDescription) async {
     final newObjective = Objective(
       id: DateTime.now().toString(),
       title: pickedTitle,
@@ -134,6 +135,7 @@ class LogProvider with ChangeNotifier {
               id: item['id'],
               title: item['title'],
               image: File(item['image']),
+              description: item['description'],
               dateTime: DateTime.parse(item['dateTime']),
               tags: item['tags'] != null ? item['tags'].split(',') : null),
         )
@@ -141,16 +143,13 @@ class LogProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  
   Future<void> fetchAndSetObjectives() async {
     final dataList = await DBHelper.getData('user_objectives');
     _objectives = dataList
-        .map(
-          (item) => Objective(
-              id: item['id'],
-              title: item['title'],
-              description: item['description'])
-        )
+        .map((item) => Objective(
+            id: item['id'],
+            title: item['title'],
+            description: item['description']))
         .toList();
     notifyListeners();
   }

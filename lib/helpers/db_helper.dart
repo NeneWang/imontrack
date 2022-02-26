@@ -7,8 +7,10 @@ class DBHelper {
     final dbPath = await sql.getDatabasesPath();
     return sql.openDatabase(path.join(dbPath, 'images.db'),
         onCreate: (db, version) {
+      db.execute(
+          'CREATE TABLE user_objectives(id TEXT PRIMARY KEY,  title TEXT, description TEXT)');
       return db.execute(
-          'CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT, image TEXT, dateTime TEXT, tags TEXT)');
+          'CREATE TABLE user_logs(id TEXT PRIMARY KEY, title TEXT, image TEXT, dateTime TEXT, tags TEXT, description TEXT)');
     }, version: 1);
   }
 

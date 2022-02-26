@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/images_provider.dart';
+import '../providers/log_provider.dart';
 import '../widgets/bottom_navigator.dart';
 import 'create_log.dart';
 
@@ -46,8 +46,7 @@ class ProgressFeed extends StatelessWidget {
                                   ),
                                 ),
                                 title: Text(imagesData.events[i].title),
-                                subtitle: Text(imagesData.events[i].dateTime
-                                    .toIso8601String()),
+                                subtitle: Text('${imagesData.events[i].description}'),
                                 onTap: () {
                                   // Navigator.of(context).pushNamed(
                                   //   ImageDetailScreen.routeName,
