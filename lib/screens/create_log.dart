@@ -111,12 +111,12 @@ class _CreateLogState extends State<CreateLog> {
                           InputDecoration(labelText: 'Description (optional)'),
                       controller: _descriptionController,
                     ),
-                    TextField(
-                      decoration:
-                          InputDecoration(labelText: 'Enter a tag (optional)'),
-                      controller: _tagsController,
-                      onSubmitted: _addTag,
-                    ),
+                    // TextField(
+                    //   decoration:
+                    //       InputDecoration(labelText: 'Enter a tag (optional)'),
+                    //   controller: _tagsController,
+                    //   onSubmitted: _addTag,
+                    // ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Row(

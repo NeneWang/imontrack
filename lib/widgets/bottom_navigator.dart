@@ -30,7 +30,7 @@ class BottomNavigator extends StatelessWidget {
               transitionDuration: Duration(seconds: 0),
             ));
             break;
-            case 2:
+          case 2:
             Navigator.of(context).pushReplacement(PageRouteBuilder(
               pageBuilder: (_, __, ___) => ProgressFeed(),
               transitionDuration: Duration(seconds: 0),
