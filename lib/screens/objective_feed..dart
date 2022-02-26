@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_radar_chart/flutter_radar_chart.dart';
+import 'package:imontrack/screens/create_objective.dart';
 import 'package:provider/provider.dart';
 import '../providers/log_provider.dart';
 import '../widgets/bottom_navigator.dart';
@@ -48,7 +49,7 @@ class ObjectiveFeed extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                Navigator.of(context).pushNamed(CreateLog.routeName);
+                Navigator.of(context).pushNamed(CreateObjective.routeName);
               },
             ),
           ],
