@@ -136,6 +136,11 @@ class LogProvider with ChangeNotifier {
     });
   }
 
+  Future <void> fetchAll() async {
+    fetchAndSetImages();
+    fetchAndSetObjectives();
+  }
+
   Future<void> fetchAndSetImages() async {
     final dataList = await DBHelper.getData('user_logs');
     // print("Fetching");

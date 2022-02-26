@@ -26,7 +26,7 @@ class ProgressFeed extends StatelessWidget {
         ),
         body: FutureBuilder(
           future: Provider.of<LogProvider>(context, listen: false)
-              .fetchAndSetImages(),
+              .fetchAll(),
           builder: (ctx, snapshot) => snapshot.connectionState ==
                   ConnectionState.waiting
               ? Center(
