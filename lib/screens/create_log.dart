@@ -23,6 +23,7 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
 
   final _titleController = TextEditingController();
   final _tagsController = TextEditingController();
+  final _descriptionController = TextEditingController();
 
 
   File _pickedImage;
@@ -104,6 +105,10 @@ class _CreateLogState extends State<CreateLog> {List<String> selectedTags = [];
                           InputDecoration(labelText: 'Title (optional)'),
                       controller: _titleController,
                     ),
+                    TextField(
+                      decoration:
+                          InputDecoration(labelText: 'Description (optional)'),
+                      controller: _descriptionController,),
                     TextField(
                       decoration:
                           InputDecoration(labelText: 'Enter a tag (optional)'),
