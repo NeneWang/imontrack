@@ -5,6 +5,8 @@ import '../widgets/bottom_navigator.dart';
 import 'create_log.dart';
 
 
+import 'view_log.dart';
+
 
 class ProgressFeed extends StatelessWidget {
   static const routeName = '/progress-feed';
@@ -48,10 +50,10 @@ class ProgressFeed extends StatelessWidget {
                                 title: Text(imagesData.events[i].title),
                                 subtitle: Text('${imagesData.events[i].description}'),
                                 onTap: () {
-                                  // Navigator.of(context).pushNamed(
-                                  //   ImageDetailScreen.routeName,
-                                  //   arguments: imagesData.events[i].id,
-                                  // );
+                                  Navigator.of(context).pushNamed(
+                                    ViewLogScreen.routeName,
+                                    arguments: imagesData.events[i].id,
+                                  );
                                 },
                               ),
                             ),
