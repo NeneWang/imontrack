@@ -10,12 +10,21 @@ import 'create_compilation.dart';
 
 import 'view_log.dart';
 
+void addOneWeek() {
+// Increase the week count somehow. like don't even count the days just add the counter and say how mnay weeks.
+  
+}
+
 class ProgressFeed extends StatelessWidget {
   static const routeName = '/progress-feed';
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Text("+1 wk"),
+          onPressed: addOneWeek,
+        ),
         appBar: AppBar(
           title: Text('Progress Feed'),
           actions: <Widget>[

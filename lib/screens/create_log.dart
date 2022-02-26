@@ -173,7 +173,7 @@ class _CreateLogState extends State<CreateLog> {
                       )
                     : Consumer<LogProvider>(
                         child: Center(
-                          child: const Text('Got no Log yet.'),
+                          child: const Text('Got no Objectives created yet.'),
                         ),
                         builder: (ctx, imagesData, ch) =>
                             imagesData.objectives.length <= 0
@@ -198,7 +198,7 @@ class _CreateLogState extends State<CreateLog> {
               )),
           RaisedButton.icon(
             icon: Icon(Icons.add),
-            label: Text('Upload Image'),
+            label: Text('Create Log'),
             onPressed: _saveLog,
             elevation: 0,
             // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

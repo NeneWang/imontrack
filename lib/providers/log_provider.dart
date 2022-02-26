@@ -11,6 +11,7 @@ import '../utils/tools.dart';
 class LogProvider with ChangeNotifier {
   List<ImageData> _log_events = [];
   List<Objective> _objectives = [];
+  int weekSinceStart = 1;
 
   List<ImageData> get events {
     return [..._log_events];
@@ -18,6 +19,10 @@ class LogProvider with ChangeNotifier {
 
   List<Objective> get objectives {
     return [..._objectives];
+  }
+
+  int increaseWeek(){
+    weekSinceStart++;
   }
 
   int get weeksStreak {
@@ -60,6 +65,7 @@ class LogProvider with ChangeNotifier {
     int streakCounter = 1;
     DateTime lastDate;
     bool firstLoop = true;
+    int dateSinceProgress = 1;
 
     for (ImageData singleEvent in sortedByDate) {
       DateTime simplifiedDate = Tools.getSimplifiedDate(singleEvent.dateTime);
