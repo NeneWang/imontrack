@@ -42,7 +42,8 @@ class _StatsBoardState extends State<StatsBoard> {
                 ),
                 StatHighlight(
                   screenSize: screenSize,
-                  title: "${Provider.of<LogProvider>(context, listen: false).streaks}",
+                  title:
+                      "${Provider.of<LogProvider>(context, listen: false).streaks}",
                   description: "Streaks",
                 ),
                 StatHighlight(
@@ -52,7 +53,8 @@ class _StatsBoardState extends State<StatsBoard> {
                 ),
                 StatHighlight(
                   screenSize: screenSize,
-                  title: "${Provider.of<LogProvider>(context, listen: false).eventsCount}",
+                  title:
+                      "${Provider.of<LogProvider>(context, listen: false).eventsCount}",
                   description: "Total Logs",
                 ),
               ],

@@ -14,7 +14,7 @@ class ObjectiveFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const ticks = [7, 14, 21, 28, 35];
+    const ticks = [1, 3, 5, 10];
 
     var provider = Provider.of<LogProvider>(context, listen: false);
     provider.fetchAndSetObjectives();
@@ -27,11 +27,9 @@ class ObjectiveFeed extends StatelessWidget {
     var objectiveData =
         provider.objectives.map((e) => provider.getWeekProgressByID(e.id));
 
-    List<String> features = ["AA"];
-    List<List<int>> data = [
-      [10]
-    ];
-
+    List<String> features = [];
+    List<List<int>> data = [[]];
+    print(objectiveData);
     features.addAll(objectiveTitles);
     data[0].addAll(objectiveData);
 
@@ -60,7 +58,7 @@ class ObjectiveFeed extends StatelessWidget {
             ),
             Expanded(
               child: FutureBuilder(
-                future: provider.fetchAndSetObjectives(),
+                future: provider.fetchAll(),
                 builder: (ctx, snapshot) =>
                     snapshot.connectionState == ConnectionState.waiting
                         ? Center(
@@ -73,13 +71,20 @@ class ObjectiveFeed extends StatelessWidget {
                             builder: (ctx, imagesData, ch) =>
                                 imagesData.objectives.length <= 0
                                     ? ch
-                                    : ListView.builder(
-                                        itemCount: imagesData.objectives.length,
-                                        itemBuilder: (ctx, i) => ListTile(
-                                            title: Text(
-                                                imagesData.objectives[i].title),
-                                            subtitle: Text(
-                                                '${imagesData.objectives[i].description}; ${imagesData.objectives[i].id} ; Logs ${provider.getWeekProgressByID(imagesData.objectives[i].id)}')),
+                                    : Column(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: ListView.builder(
+                                              itemCount:
+                                                  imagesData.objectives.length,
+                                              itemBuilder: (ctx, i) => ListTile(
+                                                  title: Text(imagesData
+                                                      .objectives[i].title),
+                                                  subtitle: Text(
+                                                      '${imagesData.objectives[i].description}; ${imagesData.objectives[i].id} ; Logs ${provider.getWeekProgressByID(imagesData.objectives[i].id)}')),
+                                            ),
+                                          )
+                                        ],
                                       ),
                           ),
               ),
