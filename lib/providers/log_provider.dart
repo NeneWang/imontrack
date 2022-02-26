@@ -12,6 +12,7 @@ import '../utils/tools.dart';
 class LogProvider with ChangeNotifier {
   List<ImageData> _log_events = [];
   List<Objective> _objectives = [];
+
   int weekSinceStart = 0;
 
   List<ImageData> get events {
@@ -28,17 +29,37 @@ class LogProvider with ChangeNotifier {
 
   List<ImageData> getImageDataByObjectiveID(String objectiveID) {
     print(objectiveID);
-    var events = _log_events.where((element) => element.objectiveID == objectiveID);
+    var events =
+        _log_events.where((element) => element.objectiveID == objectiveID);
     print(events);
-    return [
-      ...events.where((element) => element.objectiveID == objectiveID)
-    ];
+    return [...events.where((element) => element.objectiveID == objectiveID)];
   }
 
   int getWeekProgressByID(String objectiveID) {
     // The progress so you could mark them with X's
     return getImageDataByObjectiveID(objectiveID).length;
     // You have to count just by the logs. It doesn't matter really anymore easy code.
+  }
+
+  List<ImageData> getEventsBYIDMONTH(String objectiveID, int monthPrev) {
+    // First get all with objective ID
+    var objetiveMonth = getImageDataByObjectiveID(objectiveID);
+
+    // Then you want to add the event id months and compare
+    DateTime now = DateTime.now();
+
+    return [
+      ...objetiveMonth
+          .where((e) => e.dateTime.month == getFixedMonth(now.month, monthPrev))
+    ];
+  }
+
+  int getFixedMonth(int nowMonth, int prev) {
+    return nowMonth - (prev) > 0 ? nowMonth - prev : nowMonth - prev + 12;
+  }
+
+  int getMonthlyLogsBYIDMONTH(String objectiveID, int monthPrev) {
+    return getEventsBYIDMONTH(objectiveID, monthPrev).length;
   }
 
   int get eventsCount {
