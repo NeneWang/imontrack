@@ -213,6 +213,7 @@ class LogProvider with ChangeNotifier {
 
   Future<void> addObjective(
       String pickedTitle, String pickedDescription) async {
+    await updateProjectsData(pickedTitle);
     final newObjective = Objective(
       id: DateTime.now().toString(),
       title: pickedTitle,
@@ -279,14 +280,12 @@ class LogProvider with ChangeNotifier {
     }
   }
 
-  Future<void> updateProjectsData() async {
+  Future<void> updateProjectsData(String title) async {
     final url =
         Uri.parse('http://iamontrack.wangnelson.xyz/public/api/post-objective');
     // print(hypotheticToday.toIso8601String());
     try {
-      for (var o in _objectives) {
-        final response = await http.post(url, body: {'title': o.title});
-      }
+      final response = await http.post(url, body: {'title': title});
     } catch (error) {
       print(error);
       throw error;
