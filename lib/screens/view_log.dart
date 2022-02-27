@@ -20,7 +20,7 @@ class ViewLogScreen extends StatelessWidget {
     if (logEvent.tags.length>0 || logEvent.tags != null) {
       logEvent.tags.forEach((element) {
         tagsWidget.add(Chip(label: Text(objectiveName)));
-      });
+    });
     } else {
       tagsWidget.add(Chip(label: Text("No Objective set.")));
     }

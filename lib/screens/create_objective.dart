@@ -39,7 +39,7 @@ class _CreateObjectiveState extends State<CreateObjective> {
     return Scaffold(
       appBar: AppBar(title: Text("Create Objectives")),
       bottomNavigationBar: BottomNavigator(
-        indexNavigator: 1,
+        indexNavigator: 0,
         context: context,
       ),
       body: Column(
