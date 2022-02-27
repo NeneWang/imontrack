@@ -17,11 +17,10 @@ class _CreateObjectiveState extends State<CreateObjective> {
   final _descriptionController = TextEditingController();
 
   void _saveObjective() {
-    Provider.of<LogProvider>(context, listen: false)
-        .addObjective(_titleController.text, _descriptionController.text);
+    var myProvider = Provider.of<LogProvider>(context, listen: false);
+    myProvider.addObjective(_titleController.text, _descriptionController.text);
     _showToast(context);
-
-    // Navigator.of(context).pop();
+    myProvider.fetchAll().then((value) => Navigator.of(context).pop());
   }
 
   void _showToast(BuildContext context) {
@@ -38,10 +37,6 @@ class _CreateObjectiveState extends State<CreateObjective> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Create Objectives")),
-      bottomNavigationBar: BottomNavigator(
-        indexNavigator: 0,
-        context: context,
-      ),
       body: Column(
         children: <Widget>[
           Expanded(

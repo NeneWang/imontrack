@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Images',
         theme:
-            ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.yellow),
-        home: CreateObjective(),
+            ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.yellow[700]),
+        home: ProgressFeed(),
         routes: {
           CreateCompilation.routeName: (ctx) => CreateCompilation(),
           CreateLog.routeName: (ctx) => CreateLog(),

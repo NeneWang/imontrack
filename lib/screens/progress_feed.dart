@@ -24,45 +24,50 @@ class _StatsBoardState extends State<StatsBoard> {
 
   @override
   build(BuildContext context) {
+    var myProvider = Provider.of<LogProvider>(context, listen: false);
     final Size screenSize = MediaQuery.of(context).size;
     return Expanded(
         flex: 2,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                StatHighlight(
-                  screenSize: screenSize,
-                  title:
-                      "${Provider.of<LogProvider>(context, listen: false).weekSinceStart}",
-                  description: "Weeks",
-                ),
-                StatHighlight(
-                  screenSize: screenSize,
-                  title:
-                      "${Provider.of<LogProvider>(context, listen: false).streaks}",
-                  description: "Streaks",
-                ),
-                StatHighlight(
-                  screenSize: screenSize,
-                  title: "4",
-                  description: "Max Streaks",
-                ),
-                StatHighlight(
-                  screenSize: screenSize,
-                  title:
-                      "${Provider.of<LogProvider>(context, listen: false).eventsCount}",
-                  description: "Total Logs",
-                ),
-              ],
-            ),
-            FlatButton(
-                onPressed: () => addOneWeek(context), child: Text("+1 week")),
-          ],
-        ));
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              FutureBuilder(
+                future: myProvider.fetchAll(),
+                builder: (ctx, snapshot) =>
+                    snapshot.connectionState == ConnectionState.waiting
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              StatHighlight(
+                                screenSize: screenSize,
+                                title: "${myProvider.weekSinceStart}",
+                                description: "Weeks",
+                              ),
+                              StatHighlight(
+                                screenSize: screenSize,
+                                title: "${myProvider.streaks}",
+                                description: "Streaks",
+                              ),
+                              StatHighlight(
+                                screenSize: screenSize,
+                                title: "4",
+                                description: "Max Streaks",
+                              ),
+                              StatHighlight(
+                                screenSize: screenSize,
+                                title: "${myProvider.eventsCount}",
+                                description: "Total Logs",
+                              ),
+                            ],
+                          ),
+              ),
+              FlatButton(
+                  onPressed: () => addOneWeek(context), child: Text("+1 week")),
+            ]));
   }
 }
 
@@ -132,7 +137,7 @@ class ProgressFeed extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: BottomNavigator(
-          indexNavigator: 0,
+          indexNavigator: 2,
           context: context,
         ));
   }

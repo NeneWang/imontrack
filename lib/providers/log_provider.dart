@@ -224,7 +224,7 @@ class LogProvider with ChangeNotifier {
 
   Future<void> fetchAll() async {
     fetchAndSetImages();
-    fetchAndSetObjectives();
+    return fetchAndSetObjectives();
   }
 
   Future<void> fetchAndSetImages() async {

@@ -19,6 +19,26 @@ class _BottomNavigatorState extends State<BottomNavigator> {
     setState(() {
       widget.indexNavigator = index;
     });
+    switch (index) {
+      case 0:
+        Navigator.of(context).pushReplacement(PageRouteBuilder(
+          pageBuilder: (_, __, ___) => ObjectiveFeed(),
+          transitionDuration: Duration(seconds: 0),
+        ));
+        break;
+      case 1:
+        Navigator.of(context).pushReplacement(PageRouteBuilder(
+          pageBuilder: (_, __, ___) => CreateLog(),
+          transitionDuration: Duration(seconds: 0),
+        ));
+        break;
+      case 2:
+        Navigator.of(context).pushReplacement(PageRouteBuilder(
+          pageBuilder: (_, __, ___) => ProgressFeed(),
+          transitionDuration: Duration(seconds: 0),
+        ));
+        break;
+    }
   }
 
   @override

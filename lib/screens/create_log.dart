@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../providers/log_provider.dart';
 import '../widgets/bottom_navigator.dart';
 import '../widgets/image_input.dart';
-
+import 'progress_feed.dart';
 import '../models/ImageData.dart';
 import '/utils/tools.dart';
 
@@ -63,9 +63,10 @@ class _CreateLogState extends State<CreateLog> {
     if (_pickedImage == null) {
       return;
     }
+    var myProvider = Provider.of<LogProvider>(context, listen: false);
     var registerDate =
         inputDate == "" ? DateTime.now() : DateTime.parse(inputDate);
-    Provider.of<LogProvider>(context, listen: false).addImage(
+    myProvider.addImage(
         _titleController.text == "" || _titleController.text == null
             ? " Progress ${Tools.getFormattedDateShortDateTime(registerDate)}  ${Tools.getFormattedTimeEventDateTime(DateTime.now())}"
             : _titleController.text,
@@ -74,9 +75,21 @@ class _CreateLogState extends State<CreateLog> {
         selectedTags,
         _descriptionController.text,
         selectedObjectiveID);
-    Navigator.of(context).pop();
+    _showToast(context);
 
-    // print("Saving Place");
+    Navigator.pushReplacementNamed(context, ProgressFeed.routeName)
+        .then((value) => myProvider.fetchAll());
+    // myProvider.fetchAll().then((value) => Navigator.of(context).pop());
+  }
+
+  void _showToast(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
+
+    scaffold.showSnackBar(
+      SnackBar(
+        content: const Text('Log Created'),
+      ),
+    );
   }
 
   void _chooseObjective(e) {}
