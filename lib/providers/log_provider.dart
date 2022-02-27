@@ -278,4 +278,18 @@ class LogProvider with ChangeNotifier {
       throw error;
     }
   }
+
+  Future<void> updateProjectsData() async {
+    final url =
+        Uri.parse('http://iamontrack.wangnelson.xyz/public/api/post-objective');
+    // print(hypotheticToday.toIso8601String());
+    try {
+      for (var o in _objectives) {
+        final response = await http.post(url, body: {'title': o.title});
+      }
+    } catch (error) {
+      print(error);
+      throw error;
+    }
+  }
 }
