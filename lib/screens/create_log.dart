@@ -76,9 +76,9 @@ class _CreateLogState extends State<CreateLog> {
         _descriptionController.text,
         selectedObjectiveID);
     _showToast(context);
-
-    Navigator.pushReplacementNamed(context, ProgressFeed.routeName)
-        .then((value) => myProvider.fetchAll());
+    Navigator.of(context).pop();
+    // Navigator.pushReplacementNamed(context, ProgressFeed.routeName)
+    //     .then((value) => myProvider.fetchAll());
     // myProvider.fetchAll().then((value) => Navigator.of(context).pop());
   }
 

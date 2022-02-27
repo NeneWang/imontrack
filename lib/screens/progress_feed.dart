@@ -80,50 +80,63 @@ class ProgressFeed extends StatelessWidget {
         body: Column(
           children: <Widget>[
             StatsBoard(),
-            Expanded(
-                flex: 5,
-                child: FutureBuilder(
-                  future: Provider.of<LogProvider>(context, listen: false)
-                      .fetchAll(),
-                  builder: (ctx, snapshot) => snapshot.connectionState ==
-                          ConnectionState.waiting
-                      ? Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Consumer<LogProvider>(
-                          child: Center(
-                            child: const Text('Got no Log yet.'),
-                          ),
-                          builder: (ctx, imagesData, ch) =>
-                              imagesData.events.length <= 0
-                                  ? ch
-                                  : ListView.builder(
-                                      itemCount: imagesData.events.length,
-                                      itemBuilder: (ctx, i) => ListTile(
-                                        trailing: CircleAvatar(
-                                          backgroundImage: FileImage(
-                                            imagesData.events[i].image,
-                                          ),
-                                        ),
-                                        title: Text(imagesData.events[i].title),
-                                        subtitle: Text(
-                                            '${imagesData.events[i].description}'),
-                                        onTap: () {
-                                          Navigator.of(context).pushNamed(
-                                            ViewLogScreen.routeName,
-                                            arguments: imagesData.events[i].id,
-                                          );
-                                        },
-                                      ),
-                                    ),
-                        ),
-                ))
+            Expanded(flex: 5, child: ProgressLogList())
           ],
         ),
         bottomNavigationBar: BottomNavigator(
           indexNavigator: 1,
           context: context,
         ));
+  }
+}
+
+class ProgressLogList extends StatefulWidget {
+  const ProgressLogList({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _ProgressLogListState createState() => _ProgressLogListState();
+}
+
+class _ProgressLogListState extends State<ProgressLogList> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: Provider.of<LogProvider>(context, listen: false).fetchAll(),
+      builder: (ctx, snapshot) => snapshot.connectionState ==
+              ConnectionState.waiting
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Consumer<LogProvider>(
+              child: Center(
+                child: const Text('Got no Log yet.'),
+              ),
+              builder: (ctx, imagesData, ch) => imagesData.events.length <= 0
+                  ? ch
+                  : ListView.builder(
+                      itemCount: imagesData.events.length,
+                      itemBuilder: (ctx, i) => ListTile(
+                        trailing: CircleAvatar(
+                          backgroundImage: FileImage(
+                            imagesData.events[i].image,
+                          ),
+                        ),
+                        title: Text(imagesData.events[i].title),
+                        subtitle: Text('${imagesData.events[i].description}'),
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(
+                                ViewLogScreen.routeName,
+                                arguments: imagesData.events[i].id,
+                              )
+                              .then((_) => setState(() {}));
+                        },
+                      ),
+                    ),
+            ),
+    );
   }
 }
 
