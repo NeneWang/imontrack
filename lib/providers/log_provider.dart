@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
@@ -208,7 +207,13 @@ class LogProvider with ChangeNotifier {
     });
   }
 
+  Future<void> deleteImage(String id) {
+    DBHelper.delete('user_logs', id);
+  }
 
+  Future<void> deleteObjective(String id) {
+    DBHelper.delete('user_objectives', id);
+  }
 
   Future<void> addObjective(
       String pickedTitle, String pickedDescription) async {
@@ -225,7 +230,6 @@ class LogProvider with ChangeNotifier {
       'description': newObjective.description
     });
   }
-
 
   Future<void> fetchAll() async {
     fetchAndSetImages();
