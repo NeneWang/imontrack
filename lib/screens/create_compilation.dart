@@ -21,7 +21,7 @@ class _CreateCompilationState extends State<CreateCompilation> {
             Container(
               child: FlatButton(
                 child: Text(
-                  'Create Video Compilaiton',
+                  'Create Video Compilation',
                   style: TextStyle(fontSize: 20.0),
                 ),
                 onPressed: () {
