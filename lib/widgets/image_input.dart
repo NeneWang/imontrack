@@ -81,7 +81,7 @@ class _ImageInputState extends State<ImageInput> {
                   fit: BoxFit.cover,
                   width: double.infinity,
                 )
-              : Text('No Image taken'),
+              : Text('Capture your week\'s progress with a picture!'),
           alignment: Alignment.center,
         ),
         Padding(padding: EdgeInsets.all(10)),
@@ -94,13 +94,13 @@ class _ImageInputState extends State<ImageInput> {
           children: <Widget>[
             FlatButton.icon(
               icon: Icon(Icons.camera_alt),
-              label: Text('Take Pictures'),
+              label: Text('Use Camera'),
               textColor: Theme.of(context).primaryColor,
               onPressed: _takePicture,
             ),
             FlatButton.icon(
               icon: Icon(Icons.image),
-              label: Text('Choose Gallery'),
+              label: Text('From Gallery'),
               textColor: Theme.of(context).primaryColor,
               onPressed: _takePictureFromGallery,
             ),

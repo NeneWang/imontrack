@@ -25,7 +25,7 @@ class _CreateCompilationState extends State<CreateCompilation> {
                   style: TextStyle(fontSize: 20.0),
                 ),
                 onPressed: () {
-                  // Navigator.of(context).pushNamed(ContactUsScreen.routeName,);
+                  // Navigator.of(context).pushNamed(CreateVideoCompilation.routeName,);
                 },
               ),
             ),
@@ -36,10 +36,14 @@ class _CreateCompilationState extends State<CreateCompilation> {
                   style: TextStyle(fontSize: 20.0),
                 ),
                 onPressed: () {
-                  // Navigator.of(context).pushNamed(CreditsScreen.routeName,);
+                  // Navigator.of(context).pushNamed(CreateVideoCompilation.routeName,);
                 },
               ),
             ),
+            Container(
+              child: Text(
+                  "*not implemented yet* Create a video compilation of your progress and share it to your social media!"),
+            )
           ],
         ),
       ),
