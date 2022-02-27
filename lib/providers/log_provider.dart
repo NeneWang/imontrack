@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:imontrack/screens/objective_feed..dart';
 
@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../models/ImageData.dart';
 import '../models/objective.dart';
 import '../helpers/db_helper.dart';
+import 'package:http/http.dart' as http;
 import '../utils/tools.dart';
 
 class LogProvider with ChangeNotifier {
@@ -224,7 +225,8 @@ class LogProvider with ChangeNotifier {
 
   Future<void> fetchAll() async {
     fetchAndSetImages();
-    return fetchAndSetObjectives();
+    fetchAndSetObjectives();
+    return updateGeneralData();
   }
 
   Future<void> fetchAndSetImages() async {
@@ -255,5 +257,21 @@ class LogProvider with ChangeNotifier {
             description: item['description']))
         .toList();
     notifyListeners();
+  }
+
+  Future<void> updateGeneralData() async {
+    final url = Uri.parse(
+        'http://iamontrack.wangnelson.xyz/public/api/post-user-datum');
+    print(hypotheticToday.toIso8601String());
+    try {
+      final response = await http.post(url, body: {
+        'lastupdate': hypotheticToday.toIso8601String(),
+        'currentstreak': currentStreak.toString()
+      });
+      print(response);
+    } catch (error) {
+      print(error);
+      throw error;
+    }
   }
 }
