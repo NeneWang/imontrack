@@ -76,23 +76,7 @@ class ProgressFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Progress Feed'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.video_call),
-              onPressed: () {
-                Navigator.of(context).pushNamed(CreateCompilation.routeName);
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                Navigator.of(context).pushNamed(CreateLog.routeName);
-              },
-            ),
-          ],
-        ),
+        appBar: ProgressNavbar(),
         body: Column(
           children: <Widget>[
             StatsBoard(),
@@ -140,5 +124,42 @@ class ProgressFeed extends StatelessWidget {
           indexNavigator: 1,
           context: context,
         ));
+  }
+}
+
+class ProgressNavbar extends StatefulWidget with PreferredSizeWidget {
+  const ProgressNavbar({
+    Key key,
+  }) : super(key: key);
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  @override
+  _ProgressNavbarState createState() => _ProgressNavbarState();
+}
+
+class _ProgressNavbarState extends State<ProgressNavbar> {
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text('Progress Feed'),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.video_call),
+          onPressed: () {
+            Navigator.of(context)
+                .pushNamed(CreateCompilation.routeName)
+                .then((_) => setState(() {}));
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context)
+                .pushNamed(CreateLog.routeName)
+                .then((_) => setState(() {}));
+          },
+        ),
+      ],
+    );
   }
 }

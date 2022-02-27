@@ -115,10 +115,6 @@ class LogProvider with ChangeNotifier {
           logFoundDuringThisWeek = true;
         }
       }
-      // print("Cap");
-      // print(dateCap);
-      // print(prevDateCap);
-      // print(logFoundDuringThisWeek);
       dateCap = dateCap.subtract(Duration(days: 7));
     }
     return countStreaks;

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -13,10 +11,10 @@ class ViewLogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context).settings.arguments;
-    final logEvent =
-        Provider.of<LogProvider>(context, listen: false).findById(id);
-    String objectiveName = Provider.of<LogProvider>(context, listen: false)
-        .getObjectiveNameByID(logEvent.objectiveID);
+    final myProvider = Provider.of<LogProvider>(context, listen: false);
+    final logEvent = myProvider.findById(id);
+    String objectiveName =
+        myProvider.getObjectiveNameByID(logEvent.objectiveID);
 
     // final List<String> tags = logEvent.tags;
     // if (logEvent.tags.length>0 || logEvent.tags != null) {
@@ -28,6 +26,11 @@ class ViewLogScreen extends StatelessWidget {
     // }
 
     // print(logEvent);
+
+    void deletePressedHandler() async {
+      await myProvider.deleteImage(logEvent.id);
+      await myProvider.fetchAll().then((value) => Navigator.of(context).pop());
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -58,11 +61,15 @@ class ViewLogScreen extends StatelessWidget {
                   Text(DateFormat('yyyy-MM-dd – kk:mm')
                       .format(logEvent.dateTime)),
                   Text(
-                    logEvent.description,
+                    logEvent.description != null ? logEvent.description : "",
                   ),
                   SizedBox(
                     height: 10,
                   ),
+                  FlatButton(
+                    child: Text("Delete"),
+                    onPressed: deletePressedHandler,
+                  )
                 ],
               ))
         ],
