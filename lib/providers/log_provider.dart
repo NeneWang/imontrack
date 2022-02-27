@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
@@ -207,6 +208,8 @@ class LogProvider with ChangeNotifier {
     });
   }
 
+
+
   Future<void> addObjective(
       String pickedTitle, String pickedDescription) async {
     final newObjective = Objective(
@@ -222,6 +225,7 @@ class LogProvider with ChangeNotifier {
       'description': newObjective.description
     });
   }
+
 
   Future<void> fetchAll() async {
     fetchAndSetImages();
