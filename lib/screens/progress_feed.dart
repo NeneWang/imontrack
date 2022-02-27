@@ -116,7 +116,7 @@ class ProgressFeed extends StatelessWidget {
                                   : ListView.builder(
                                       itemCount: imagesData.events.length,
                                       itemBuilder: (ctx, i) => ListTile(
-                                        leading: CircleAvatar(
+                                        trailing: CircleAvatar(
                                           backgroundImage: FileImage(
                                             imagesData.events[i].image,
                                           ),
