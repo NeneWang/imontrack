@@ -137,7 +137,7 @@ class ProgressFeed extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: BottomNavigator(
-          indexNavigator: 2,
+          indexNavigator: 1,
           context: context,
         ));
   }

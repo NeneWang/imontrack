@@ -28,12 +28,6 @@ class _BottomNavigatorState extends State<BottomNavigator> {
         break;
       case 1:
         Navigator.of(context).pushReplacement(PageRouteBuilder(
-          pageBuilder: (_, __, ___) => CreateLog(),
-          transitionDuration: Duration(seconds: 0),
-        ));
-        break;
-      case 2:
-        Navigator.of(context).pushReplacement(PageRouteBuilder(
           pageBuilder: (_, __, ___) => ProgressFeed(),
           transitionDuration: Duration(seconds: 0),
         ));
@@ -57,11 +51,6 @@ class _BottomNavigatorState extends State<BottomNavigator> {
           backgroundColor: Theme.of(context).primaryColor,
           icon: Icon(Icons.edit),
           title: Text('Objectives'),
-        ),
-        BottomNavigationBarItem(
-          backgroundColor: Theme.of(context).primaryColor,
-          icon: Icon(Icons.add_circle_outline_outlined),
-          title: Text('Logs'),
         ),
         BottomNavigationBarItem(
           backgroundColor: Theme.of(context).primaryColor,
